@@ -225,7 +225,7 @@
   "sources": {
    "type": "array",
    "maxItems": 64,
-   "description": "OPTIONAL (OGR 1.10 DRAFT). WHAT the untrusted content in this payload ACTUALLY IS \u2014 see specification/provenance.md. A runtime already derives trusted/user/untrusted from message roles; what it cannot derive is that the opaque string a tool returned is an email whose DMARC failed. That fact is producer-known, so it rides here. A CLAIM per the `integration` rule: a runtime MUST NOT RAISE trust on its strength, MAY use it only to lower trust, select detectors and enrich audit, and with the field present MUST NOT reach a LESS strict decision than it would without it (a forged 'dmarc: pass' must be unable to buy anything). Absent is not a claim of trustworthiness \u2014 unlabelled content keeps the trust its role implies.",
+   "description": "OPTIONAL (OGR 1.10 DRAFT). WHAT the untrusted content in this payload ACTUALLY IS — see specification/provenance.md. A runtime already derives trusted/user/untrusted from message roles; what it cannot derive is that the opaque string a tool returned is an email whose DMARC failed. That fact is producer-known, so it rides here. A CLAIM per the `integration` rule: a runtime MUST NOT RAISE trust on its strength, MAY use it only to lower trust, select detectors and enrich audit, and with the field present MUST NOT reach a LESS strict decision than it would without it (a forged 'dmarc: pass' must be unable to buy anything). Absent is not a claim of trustworthiness — unlabelled content keeps the trust its role implies.",
    "items": {
     "type": "object",
     "additionalProperties": false,
@@ -242,7 +242,7 @@
      "channel": {
       "type": "string",
       "maxLength": 64,
-      "description": "HOW the content entered: 'email.inbound', 'web.fetch', 'doc.upload', 'mcp.tool', 'rag.retrieve', \u2026 Open vocabulary; an unknown channel is untrusted like any other, never a reason to reject the event."
+      "description": "HOW the content entered: 'email.inbound', 'web.fetch', 'doc.upload', 'mcp.tool', 'rag.retrieve', … Open vocabulary; an unknown channel is untrusted like any other, never a reason to reject the event."
      },
      "origin": {
       "type": "string",
@@ -251,13 +251,75 @@
      },
      "auth": {
       "type": "object",
-      "description": "The channel's OWN authentication result, verbatim and channel-specific (e.g. {spf, dkim, dmarc} for email). Deliberately untyped: a runtime reads what it recognises and ignores the rest. Never a proof \u2014 see the array's description."
+      "description": "The channel's OWN authentication result, verbatim and channel-specific (e.g. {spf, dkim, dmarc} for email). Deliberately untyped: a runtime reads what it recognises and ignores the rest. Never a proof — see the array's description."
      },
      "fetched_at": {
       "type": "string",
       "format": "date-time",
       "description": "RFC 3339 instant the content was obtained, where it differs materially from when this step was built."
      }
+    }
+   }
+  },
+  "exec": {
+   "type": "object",
+   "description": "OGR 1.11 DRAFT. What the tool calls actually did, from a sensor around the agent. A claim. Unknown keys inside are ignored.",
+   "required": [
+    "items"
+   ],
+   "properties": {
+    "items": {
+     "type": "array",
+     "maxItems": 500,
+     "items": {
+      "type": "object",
+      "required": [
+       "kind",
+       "target",
+       "count",
+       "call_ids"
+      ],
+      "properties": {
+       "kind": {
+        "type": "string",
+        "maxLength": 32
+       },
+       "target": {
+        "type": "string",
+        "maxLength": 2048
+       },
+       "action": {
+        "type": "string",
+        "maxLength": 32
+       },
+       "denied": {
+        "type": "boolean"
+       },
+       "bytes_up": {
+        "type": "integer",
+        "minimum": 0
+       },
+       "count": {
+        "type": "integer",
+        "minimum": 1
+       },
+       "call_ids": {
+        "type": "array",
+        "maxItems": 64,
+        "items": {
+         "type": "string",
+         "maxLength": 256
+        }
+       },
+       "undeclared": {
+        "type": "boolean"
+       }
+      }
+     }
+    },
+    "dropped": {
+     "type": "integer",
+     "minimum": 0
     }
    }
   }
