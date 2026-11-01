@@ -539,6 +539,52 @@ quantile is a hop that was never timed pulling every reader toward it).
 enforcement or trust from it — and MUST NOT correct any stored time by `skew_ms`,
 which would make every recorded duration depend on a number that moves.
 
+## `exec` — what the tool calls actually did (1.11 DRAFT)
+
+`exec` is optional, and only a sensor that can see execution sends it: a sandbox
+around the agent, not a gateway or a plugin. It is the first thing on the wire
+from L1 Exec, and it says what ran between a tool call and its result.
+
+```json
+"exec": {
+  "items": [
+    { "kind": "network", "target": "collector.example:443", "action": "POST",
+      "bytes_up": 40000, "count": 1, "call_ids": ["call_1"], "undeclared": true },
+    { "kind": "file", "target": "/home/a/.ssh/id_rsa", "action": "read",
+      "denied": true, "count": 1, "call_ids": ["call_1"] }
+  ],
+  "dropped": 0
+}
+```
+
+| Field | Meaning |
+|---|---|
+| `kind` | `network` or `file`. A runtime MUST tolerate others. |
+| `target` | `host:port`, or a path. Never a query string or a body. |
+| `action` | an HTTP method, or `read` / `write`. |
+| `denied` | the sensor refused it, so it did not happen. |
+| `bytes_up` | bytes sent, where the sensor could count them. |
+| `count` | how many times this exact item occurred. |
+| `call_ids` | every tool call open when it happened. |
+| `undeclared` | no call in `call_ids` named this network target. |
+| `dropped` | items cut for size, most telling kept. |
+
+**It rides the `step/request` that carries the results**, because a call's result
+already rides the next step's request. That keeps one event to one phase, and lets
+a runtime read the evidence before the model reads the result. Activity after the
+last model call has no event to ride, and is not reported.
+
+**`call_ids` is what ties the altitudes together.** A call is open from the reply
+that issued it until the request carrying its result. Empty means no call was open,
+and several means *one of these*: a sensor MUST NOT guess among parallel calls.
+
+**It is a CLAIM**, like [`integration`](#integration): self-declared, and a runtime
+MUST NOT rest a control on it being present or complete. `undeclared` is the sensor's
+own comparison, not a verdict. The object is tolerant where the envelope is strict: a
+runtime ignores unknown keys inside it. A producer MUST NOT send it to a runtime older
+than 1.11, which refuses the unknown top-level key; on that 400 it SHOULD drop the
+field and resend, since the judgement matters more than the evidence.
+
 ## `redaction`
 
 `redaction` is the per-step report of an integration doing

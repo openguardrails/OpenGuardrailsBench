@@ -9,6 +9,12 @@ version is independent of any implementation's package version.
 
 ## [Unreleased]
 
+### `exec` (1.11 DRAFT, additive and optional)
+
+A sandbox around the agent can report what tool calls actually did: connections made and files
+refused, each tied to the tool calls open at that moment by `call_ids`. It rides the `step/request`
+that carries the results. It is a claim, and no control may rest on it.
+
 ### mitmproxy addon 1.1.0 (implementation, not a wire change)
 - **Codex responses are judged.** The ChatGPT backend streams
   `/backend-api/codex/responses` with no content-type; a body opening with an SSE
