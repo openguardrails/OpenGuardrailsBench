@@ -52,6 +52,8 @@ def test_full_requires_all_three_complete_parts():
 def test_parser_does_not_guess_or_read_thoughts():
     assert parse('<think>unsafe</think>safe','llama_guard') is False
     assert parse('not unsafe','llama_guard') is None
+    assert parse('unsafe\nS5','openguardrails_text') is True
+    assert parse('safe','openguardrails_text') is False
     assert parse('{"unsafe":"false"}','json') is None
     assert parse('[]','json') is None
     assert parse('Safety: Controversial\nCategories: None','qwen_guard') is True
@@ -88,3 +90,17 @@ def test_duplicate_and_unknown_result_rejected():
     rs=rows();ps=predictions(rs)
     with pytest.raises(ValueError):score(rs,ps+[ps[0]],bootstrap=0)
     with pytest.raises(ValueError):score(rs,[{**ps[0],'id':'unknown'}],bootstrap=0)
+
+
+def test_systemone_probability_and_label_isolation():
+    from ogb.adapters import systemone_payload,parse_noul
+    r=rows()[0];r['rationale']='LABEL_MUST_NOT_LEAK'
+    body=systemone_payload(r,'example')
+    assert 'LABEL_MUST_NOT_LEAK' not in json.dumps(body)
+    assert 'unsafe' not in body['state'].lower()
+    def response(p):return {'model':'example','answers':{'unsafe':{'type':'noul','noul':p}}}
+    assert parse_noul(response(.5),'example') is True
+    assert parse_noul(response(.499),'example') is False
+    for p in [True,'0.7',None,-.1,1.1,float('nan')]:
+        assert parse_noul(response(p),'example') is None
+    assert parse_noul(response(.9),'wrong-version') is None

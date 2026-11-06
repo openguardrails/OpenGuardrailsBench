@@ -1,0 +1,11 @@
+{
+  "python": "3.10.12",
+  "platform": "Linux-5.15.0-151-generic-x86_64-with-glibc2.35",
+  "workers": 4,
+  "warmup_requests": 0,
+  "model_revision": "sha256:64cb12ac57ce4829395b49fe4973e6a6c87b010643bb89c747cdfa32b9a26376",
+  "packages": {
+    "torch": "2.10.0",
+    "transformers": "5.5.4"
+  }
+}

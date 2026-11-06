@@ -12,6 +12,7 @@ from ogb.data import load_rows, write_json
 from ogb.runner import run
 
 MODELS = [
+ ('openguardrails-text-4b-0124','openguardrails/OpenGuardrails-Text-4B-0124','openguardrails_text',True),
  ('qwen3guard-0.6b','Qwen/Qwen3Guard-Gen-0.6B','qwen_guard',False),
  ('nemotron-safety-4b','nvidia/Nemotron-Content-Safety-Reasoning-4B','nemotron',True),
  ('nemotron-safety-8b-v3','nvidia/Llama-3.1-Nemotron-Safety-Guard-8B-v3','nemoguard',True),
@@ -43,6 +44,9 @@ def main():
             cfg={'engine':'transformers','model':model,'adapter':adapter,'revision':revision,
                  'device':a.device,'offload_embeddings':a.offload_embeddings,'quantize_nf4':quant,'max_new_tokens':128,'temperature':0,
                  'serialization':'policy-context-target-v1','hardware':'shared RTX 4090; 32% process allocator cap'}
+            if model.startswith('openguardrails/'):
+                cfg['affiliation']='Maintainer-owned open-weight model; self-evaluated; not an independent assessment.'
+                cfg['scope']='Published policy/context text wrapper with native safe/unsafe output parsing.'
             run(rows,detector,out,cfg)
             del detector
         except Exception as e:

@@ -2,7 +2,7 @@ import argparse
 import json
 import os
 from pathlib import Path
-from .adapters import HTTPModel, TransformersModel
+from .adapters import HTTPModel, TransformersModel, SystemOneModel
 from .data import load_rows, write_json
 from .runner import run
 from .scoring import score
@@ -20,9 +20,9 @@ def main():
     r = sub.add_parser('run')
     r.add_argument('--rows', required=True)
     r.add_argument('--out', required=True)
-    r.add_argument('--engine', choices=['http','transformers','allow-all','block-all'], required=True)
+    r.add_argument('--engine', choices=['http','systemone','transformers','allow-all','block-all'], required=True)
     r.add_argument('--model', default='baseline')
-    r.add_argument('--adapter', choices=['json','nemotron','nemoguard','qwen_guard','llama_guard'], default='json')
+    r.add_argument('--adapter', choices=['json','nemotron','nemoguard','qwen_guard','llama_guard','openguardrails_text'], default='json')
     r.add_argument('--base-url', default='http://127.0.0.1:8000/v1')
     r.add_argument('--revision', default='main')
     r.add_argument('--device', default='cpu')
@@ -38,6 +38,10 @@ def main():
     config = {k:v for k,v in vars(args).items() if k not in {'out','rows','command'}}
     if args.engine == 'http':
         detector = HTTPModel(args.base_url, args.model, args.adapter, os.getenv('OGB_API_KEY',''))
+    elif args.engine == 'systemone':
+        config['threshold'] = 0.5
+        config['adapter'] = 'systemone-noul'
+        detector = SystemOneModel(args.base_url, args.model, os.getenv('OGB_API_KEY',''))
     elif args.engine == 'transformers':
         if args.workers != 1: parser.error('Transformers engine requires --workers 1')
         if args.revision == 'main': parser.error('Pin --revision to a model commit SHA')

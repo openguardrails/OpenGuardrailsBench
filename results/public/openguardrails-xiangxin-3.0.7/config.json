@@ -1,0 +1,25 @@
+{
+  "engine": "systemone",
+  "model": "OpenGuardrails/Xiangxin-3.0.7",
+  "api_model": "xiangxin-3.0",
+  "adapter": "systemone-noul",
+  "revision": "sha256:64cb12ac57ce4829395b49fe4973e6a6c87b010643bb89c747cdfa32b9a26376",
+  "deployment": {
+    "container_id": "347cb4666a6f96f7c169dff094c4560aa6a7720e27c9ac3357933b471daea2cc",
+    "image_id": "sha256:64cb12ac57ce4829395b49fe4973e6a6c87b010643bb89c747cdfa32b9a26376",
+    "weight_metadata": {
+      "config.json": "1a91d5817f8f485fe0a2410fa6a9391a368e7989a8084303a3fd01332bc8fd15",
+      "model.safetensors.index.json": "1075636f313a8bf7427b8d6a3d3faf8887f369d5e2ba3185f186c7a2dd13dabc",
+      "tokenizer_config.json": "66e427c470fe580fe8c7b5725d857af23d8417e37fae62667ec698306a19987b"
+    }
+  },
+  "threshold": 0.5,
+  "serialization": "policy-context-target-v1",
+  "quantize_nf4": false,
+  "precision": "BF16",
+  "hardware": "shared t3090, 2 x RTX A6000, tensor parallel 2",
+  "scope": "Model backend only; not AIRS rule engine, cache or detector composition.",
+  "affiliation": "Maintainer-owned model; self-evaluated; not an independent assessment.",
+  "suite_hash": "0732ecaa39fbffe4668b7afbe706235d404cadf3b9566947c1e12ef8b46f3535",
+  "version": "0.1.0"
+}
