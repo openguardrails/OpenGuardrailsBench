@@ -1,0 +1,15 @@
+{
+  "engine": "transformers",
+  "model": "meta-llama/Llama-Guard-3-1B",
+  "adapter": "llama_guard",
+  "revision": "acf7aafa60f0410f8f42b1fa35e077d705892029",
+  "device": "cuda:0",
+  "offload_embeddings": false,
+  "quantize_nf4": false,
+  "max_new_tokens": 128,
+  "temperature": 0,
+  "serialization": "policy-context-target-v1",
+  "hardware": "shared RTX 4090; 32% process allocator cap",
+  "suite_hash": "0732ecaa39fbffe4668b7afbe706235d404cadf3b9566947c1e12ef8b46f3535",
+  "version": "0.1.0"
+}

@@ -1,0 +1,25 @@
+{
+  "deployment_path": "/mnt/data/models/Qwen/Qwen3.8-27B-W8A8-INT8-local",
+  "files": {
+    "config.json": {
+      "sha256": "31489e944d56b38b6b399c985c60a711bdf5d29d6c827bd810f562d415572800",
+      "bytes": 21045
+    },
+    "generation_config.json": {
+      "sha256": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+      "bytes": 202
+    },
+    "tokenizer_config.json": {
+      "sha256": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87",
+      "bytes": 1123
+    },
+    "model.safetensors.index.json": {
+      "sha256": "f901361234c695030f1818a5959d2888b38a853609dc79e5e59bb40257112e9a",
+      "bytes": 152712
+    }
+  },
+  "model_type": "qwen3_5",
+  "architectures": [
+    "Qwen3_5ForConditionalGeneration"
+  ]
+}

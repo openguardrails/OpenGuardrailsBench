@@ -1,0 +1,60 @@
+{
+  "name": "OpenGuardrailsBench",
+  "edition": "0.1.0-pilot",
+  "label_status": "machine-authored; independent adjudication pending",
+  "author": {
+    "served_alias": "qwen3.8-27b",
+    "host": "t3090",
+    "deployment_model_path": "/mnt/data/models/Qwen/Qwen3.8-27B-W8A8-INT8-local"
+  },
+  "partitions": {
+    "public": {
+      "rows": 192,
+      "sha256": "7ce49af0684cab8a33e5d2a41680f2f6bff777a2e7a2da5dc05b5034f96cdaed",
+      "languages": {
+        "en": 96,
+        "zh": 96
+      },
+      "unsafe": 96
+    },
+    "private_same": {
+      "rows": 192,
+      "sha256": "36c5124f98ab923b286b303c61c3ddc08ed922fec5948308b9f5e1a79493cc8c",
+      "languages": {
+        "en": 96,
+        "zh": 96
+      },
+      "unsafe": 96
+    },
+    "private_novel": {
+      "rows": 96,
+      "sha256": "3a70339c737d9e25cc98ee92c51019985a800d1058ca13ee8861cc6f309495e1",
+      "languages": {
+        "en": 48,
+        "zh": 48
+      },
+      "unsafe": 48
+    }
+  },
+  "full_weights": {
+    "private_same": 0.6,
+    "private_novel": 0.4
+  },
+  "public_skills": [
+    "data_exfiltration",
+    "grounding",
+    "hate_harassment",
+    "malicious_commands",
+    "medical_boundaries",
+    "pii_disclosure",
+    "prompt_injection",
+    "secret_leakage",
+    "self_harm",
+    "sexual_safety",
+    "topic_authorization",
+    "violence_weapons"
+  ],
+  "editorial_corrections": 11,
+  "license": "Apache-2.0",
+  "upstream_data": "No third-party benchmark data redistributed"
+}

@@ -1,0 +1,17 @@
+{
+  "python": "3.10.12",
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "workers": 1,
+  "warmup_requests": 0,
+  "model_revision": "acf7aafa60f0410f8f42b1fa35e077d705892029",
+  "packages": {
+    "torch": "2.14.1",
+    "transformers": "5.17.0",
+    "huggingface_hub": "1.33.0",
+    "bitsandbytes": "0.50.2",
+    "accelerate": "1.15.0"
+  },
+  "chat_template_sha256": "df3965ba586f628bed4f3bb122cda2cc7502d5fdd87b525d4a3fea37831905f7",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "cuda_runtime": "13.0"
+}

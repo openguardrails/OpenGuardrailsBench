@@ -1,0 +1,3 @@
+# Archived protocol code should not define the benchmark repository's language.
+legacy/** linguist-vendored
+*.jsonl linguist-generated

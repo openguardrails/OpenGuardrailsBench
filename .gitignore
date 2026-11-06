@@ -33,3 +33,11 @@ integrations/gateway/mitmproxy/log
 # Higress WASM plugin build output (make build / make push)
 integrations/gateway/higress/plugin.wasm
 integrations/gateway/higress/plugin.tar.gz
+
+# OpenGuardrailsBench: never commit held-out data, prompts, outputs, or generation logs
+private/
+work/
+.env*
+!/.env.example
+results/raw/
+*.log

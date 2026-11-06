@@ -1,0 +1,12 @@
+{
+  "engine": "block-all",
+  "model": "block-all",
+  "adapter": "json",
+  "base_url": "http://127.0.0.1:8000/v1",
+  "revision": "main",
+  "device": "cpu",
+  "quantize": false,
+  "workers": 1,
+  "suite_hash": "0732ecaa39fbffe4668b7afbe706235d404cadf3b9566947c1e12ef8b46f3535",
+  "version": "0.1.0"
+}
