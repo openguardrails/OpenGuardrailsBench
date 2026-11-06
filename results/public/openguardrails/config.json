@@ -1,7 +1,6 @@
 {
   "engine": "systemone",
-  "model": "OpenGuardrails/Xiangxin-3.0.7",
-  "api_model": "xiangxin-3.0",
+  "model": "OpenGuardrails",
   "adapter": "systemone-noul",
   "revision": "sha256:64cb12ac57ce4829395b49fe4973e6a6c87b010643bb89c747cdfa32b9a26376",
   "deployment": {
@@ -18,8 +17,9 @@
   "quantize_nf4": false,
   "precision": "BF16",
   "hardware": "shared t3090, 2 x RTX A6000, tensor parallel 2",
-  "scope": "Model backend only; not AIRS rule engine, cache or detector composition.",
+  "scope": "OpenGuardrails shared safety capability, evaluated through its typed decision interface.",
   "affiliation": "Maintainer-owned model; self-evaluated; not an independent assessment.",
   "suite_hash": "0732ecaa39fbffe4668b7afbe706235d404cadf3b9566947c1e12ef8b46f3535",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "receipt_note": "Backend model alias redacted from public receipts; deployment fingerprints and numerical outputs are retained."
 }

@@ -12,7 +12,6 @@ from ogb.data import load_rows, write_json
 from ogb.runner import run
 
 MODELS = [
- ('openguardrails-text-4b-0124','openguardrails/OpenGuardrails-Text-4B-0124','openguardrails_text',True),
  ('qwen3guard-0.6b','Qwen/Qwen3Guard-Gen-0.6B','qwen_guard',False),
  ('nemotron-safety-4b','nvidia/Nemotron-Content-Safety-Reasoning-4B','nemotron',True),
  ('nemotron-safety-8b-v3','nvidia/Llama-3.1-Nemotron-Safety-Guard-8B-v3','nemoguard',True),

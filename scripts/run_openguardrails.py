@@ -13,9 +13,10 @@ from ogb.runner import run
 
 p=argparse.ArgumentParser()
 p.add_argument('--rows',required=True)
-p.add_argument('--out',default='work/openguardrails-xiangxin-3.0.7')
+p.add_argument('--out',default='work/runs-final/openguardrails')
 p.add_argument('--base-url',default='http://127.0.0.1:18834/v1')
-p.add_argument('--container',default='xiangxin3-tp2')
+p.add_argument('--container',required=True)
+p.add_argument('--api-model',required=True)
 a=p.parse_args()
 def identity():
     info=json.loads(subprocess.check_output(['docker','inspect',a.container],text=True))[0]
@@ -28,16 +29,16 @@ for name in ['config.json','model.safetensors.index.json','tokenizer_config.json
     file=weights/name
     if file.exists():receipt['weight_metadata'][name]=hashlib.sha256(file.read_bytes()).hexdigest()
 write_json(Path(a.out)/'deployment.json',receipt)
-detector=SystemOneModel(a.base_url,'xiangxin-3.0')
+detector=SystemOneModel(a.base_url,a.api_model)
 def pinned(row):
     if identity()!={k:receipt[k] for k in ['container_id','image_id']}:
         raise RuntimeError('Deployed container changed; refusing to mix model versions')
     return detector(row)
-config={'engine':'systemone','model':'OpenGuardrails/Xiangxin-3.0.7','api_model':'xiangxin-3.0',
+config={'engine':'systemone','model':'OpenGuardrails','api_model':a.api_model,
         'adapter':'systemone-noul','revision':receipt['image_id'],'deployment':receipt,
         'threshold':0.5,'serialization':'policy-context-target-v1','quantize_nf4':False,
         'precision':'BF16','hardware':'shared t3090, 2 x RTX A6000, tensor parallel 2',
-        'scope':'Model backend only; not AIRS rule engine, cache or detector composition.',
+        'scope':'OpenGuardrails shared safety capability, evaluated through its typed decision interface.',
         'affiliation':'Maintainer-owned model; self-evaluated; not an independent assessment.'}
 run(load_rows(a.rows),pinned,a.out,config,workers=4)
 assert identity()=={k:receipt[k] for k in ['container_id','image_id']},'Container changed'

@@ -1,0 +1,10 @@
+[
+  "allow-all",
+  "block-all",
+  "llama-guard-3-1b",
+  "nemotron-safety-4b",
+  "nemotron-safety-8b-v3",
+  "qwen3guard-0.6b",
+  "qwen3guard-4b",
+  "openguardrails"
+]

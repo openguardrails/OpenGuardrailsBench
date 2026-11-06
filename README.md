@@ -56,13 +56,13 @@ python -m ogb run --engine transformers --adapter qwen_guard \
   --out work/qwen-guard-public
 ```
 
-Adapters: JSON classifiers, Qwen3Guard, NVIDIA NemoGuard, NVIDIA Nemotron Safety Reasoning, Llama Guard, OpenGuardrails Text, and the typed SystemOne API. Some models need gated base weights; access failures are recorded, never replaced with invented scores. Four-bit runs must be labeled as such. Each model's license applies separately.
+Adapters: JSON classifiers, Qwen3Guard, NVIDIA NemoGuard, NVIDIA Nemotron Safety Reasoning, Llama Guard, and the typed OpenGuardrails decision API. Some models need gated base weights; access failures are recorded, never replaced with invented scores. Four-bit runs must be labeled as such. Each model's license applies separately.
 
 **Protocol scope:** the pilot serializes policy, evidence and target into text for native fixed-taxonomy guards. This measures contextual policy classification under that wrapper, not the vendor's original native content benchmark. Models that cannot follow custom policies may perform poorly on policy tracks. We report per-area breakdowns and the exact adapter.
 
 ## Inspect results
 
-Measured model runs and public receipts are available in [the pilot results](results/RESULTS.md). Maintainer-owned OpenGuardrails models are explicitly marked as self-evaluated. Xiangxin uses a typed decision API; the public Text model uses its native safe/unsafe parser on the same policy/context wrapper. One truncated NVIDIA 8B response leaves its Full index blank. These scores apply to the published adapters, not native vendor benchmark performance.
+Measured model runs and public receipts are available in [the pilot results](results/RESULTS.md). OpenGuardrails is for builders; AIRS is the enterprise edition, and both share the same safety capability. The OpenGuardrails entry evaluates that capability through its typed decision API and is explicitly marked as maintainer-owned and self-evaluated. One truncated NVIDIA 8B response leaves its Full index blank. These scores apply to the published adapters, not native vendor benchmark performance.
 
 Each run saves `config.json`, `environment.json`, `results.jsonl`, and `scores.json`. Raw public predictions may be published. Private prompts, case identifiers, rationales, and model outputs stay private; the public leaderboard gets aggregate counts and scores only.
 

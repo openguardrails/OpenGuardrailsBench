@@ -81,7 +81,7 @@ def main():
     if a.target != 'space':
         pub=ensure('dataset',a.name)
         upload('dataset',pub,{'README.md':'data/README.md','public/ogb-0.1.jsonl':'data/public/ogb-0.1.jsonl',
-                              'manifest.json':'data/manifest.json', 'author-deployment.json':'data/author-deployment.json'})
+                              'manifest.json':'data/manifest.json', 'participants.json':'data/participants.json', 'author-deployment.json':'data/author-deployment.json'})
         if not a.public_only:
             private=ensure('dataset',a.name+'-private',True)
             directory=Path(a.private_dir)

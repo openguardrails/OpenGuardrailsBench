@@ -16,6 +16,17 @@
       "affiliation": null,
       "scope": null,
       "precision": null,
+      "completion": {
+        "total": 480,
+        "attempted": 480,
+        "valid": 480,
+        "invalid": 0,
+        "errors": 0,
+        "missing": 0,
+        "state": "complete",
+        "output_limit_failures": 0,
+        "all_predictions_safe": true
+      },
       "parts": {
         "public": {
           "n": 192,
@@ -348,6 +359,17 @@
       "affiliation": null,
       "scope": null,
       "precision": null,
+      "completion": {
+        "total": 480,
+        "attempted": 480,
+        "valid": 480,
+        "invalid": 0,
+        "errors": 0,
+        "missing": 0,
+        "state": "complete",
+        "output_limit_failures": 0,
+        "all_predictions_safe": false
+      },
       "parts": {
         "public": {
           "n": 192,
@@ -680,6 +702,17 @@
       "affiliation": null,
       "scope": null,
       "precision": null,
+      "completion": {
+        "total": 480,
+        "attempted": 480,
+        "valid": 480,
+        "invalid": 0,
+        "errors": 0,
+        "missing": 0,
+        "state": "complete",
+        "output_limit_failures": 0,
+        "all_predictions_safe": true
+      },
       "parts": {
         "public": {
           "n": 192,
@@ -1012,6 +1045,17 @@
       "affiliation": null,
       "scope": null,
       "precision": null,
+      "completion": {
+        "total": 480,
+        "attempted": 480,
+        "valid": 480,
+        "invalid": 0,
+        "errors": 0,
+        "missing": 0,
+        "state": "complete",
+        "output_limit_failures": 0,
+        "all_predictions_safe": false
+      },
       "parts": {
         "public": {
           "n": 192,
@@ -1344,6 +1388,17 @@
       "affiliation": null,
       "scope": null,
       "precision": null,
+      "completion": {
+        "total": 480,
+        "attempted": 480,
+        "valid": 479,
+        "invalid": 1,
+        "errors": 0,
+        "missing": 0,
+        "state": "finished_with_invalid",
+        "output_limit_failures": 1,
+        "all_predictions_safe": false
+      },
       "parts": {
         "public": {
           "n": 192,
@@ -1664,340 +1719,8 @@
       }
     },
     {
-      "id": "openguardrails-text-4b-0124",
-      "model": "openguardrails/OpenGuardrails-Text-4B-0124",
-      "adapter": "openguardrails_text",
-      "revision": "9bdd1fb549e01b5f6aae4e9c395998492a08830b",
-      "quantize_nf4": true,
-      "offload_embeddings": false,
-      "status": "synthetic-provisional",
-      "edition": "0.1.0-pilot",
-      "full_index": 23.385416666666668,
-      "affiliation": "Maintainer-owned open-weight model; self-evaluated; not an independent assessment.",
-      "scope": "Published policy/context text wrapper with native safe/unsafe output parsing.",
-      "precision": null,
-      "parts": {
-        "public": {
-          "n": 192,
-          "answered": 192,
-          "coverage": 1.0,
-          "index": 39.583333333333336,
-          "ci95": [
-            31.770833333333332,
-            48.4375
-          ],
-          "balanced_accuracy": 0.7135416666666667,
-          "precision": 0.8727272727272727,
-          "recall": 0.5,
-          "false_positive_rate": 0.07291666666666667,
-          "f1": 0.6357615894039735,
-          "pair_exact": 0.4270833333333333,
-          "latency_p50_ms": 93.45836995635182,
-          "latency_p95_ms": 2619.67914190609,
-          "areas": {
-            "content_safety": {
-              "score": 62.5,
-              "skills": {
-                "hate_harassment": {
-                  "n": 16,
-                  "answered": 16,
-                  "coverage": 1.0,
-                  "tp": 7,
-                  "tn": 4,
-                  "fp": 4,
-                  "fn": 1,
-                  "missing_positive": 0,
-                  "missing_negative": 0,
-                  "precision": 0.6363636363636364,
-                  "recall": 0.875,
-                  "false_positive_rate": 0.5,
-                  "f1": 0.7368421052631579,
-                  "balanced_accuracy": 0.6875,
-                  "skill": 37.5,
-                  "pair_exact": 0.375,
-                  "latency_p50_ms": 2563.389961957,
-                  "latency_p95_ms": 2643.128643045202
-                },
-                "self_harm": {
-                  "n": 16,
-                  "answered": 16,
-                  "coverage": 1.0,
-                  "tp": 5,
-                  "tn": 7,
-                  "fp": 1,
-                  "fn": 3,
-                  "missing_positive": 0,
-                  "missing_negative": 0,
-                  "precision": 0.8333333333333334,
-                  "recall": 0.625,
-                  "false_positive_rate": 0.125,
-                  "f1": 0.7142857142857143,
-                  "balanced_accuracy": 0.75,
-                  "skill": 50.0,
-                  "pair_exact": 0.5,
-                  "latency_p50_ms": 122.6278180256486,
-                  "latency_p95_ms": 2622.331343940459
-                },
-                "sexual_safety": {
-                  "n": 16,
-                  "answered": 16,
-                  "coverage": 1.0,
-                  "tp": 7,
-                  "tn": 7,
-                  "fp": 1,
-                  "fn": 1,
-                  "missing_positive": 0,
-                  "missing_negative": 0,
-                  "precision": 0.875,
-                  "recall": 0.875,
-                  "false_positive_rate": 0.125,
-                  "f1": 0.875,
-                  "balanced_accuracy": 0.875,
-                  "skill": 75.0,
-                  "pair_exact": 0.75,
-                  "latency_p50_ms": 2560.4853669647127,
-                  "latency_p95_ms": 2601.898403954692
-                },
-                "violence_weapons": {
-                  "n": 16,
-                  "answered": 16,
-                  "coverage": 1.0,
-                  "tp": 8,
-                  "tn": 7,
-                  "fp": 1,
-                  "fn": 0,
-                  "missing_positive": 0,
-                  "missing_negative": 0,
-                  "precision": 0.8888888888888888,
-                  "recall": 1.0,
-                  "false_positive_rate": 0.125,
-                  "f1": 0.9411764705882353,
-                  "balanced_accuracy": 0.9375,
-                  "skill": 87.5,
-                  "pair_exact": 0.875,
-                  "latency_p50_ms": 2525.3286119550467,
-                  "latency_p95_ms": 2624.3404319975525
-                }
-              }
-            },
-            "privacy": {
-              "score": 25.0,
-              "skills": {
-                "pii_disclosure": {
-                  "n": 16,
-                  "answered": 16,
-                  "coverage": 1.0,
-                  "tp": 1,
-                  "tn": 8,
-                  "fp": 0,
-                  "fn": 7,
-                  "missing_positive": 0,
-                  "missing_negative": 0,
-                  "precision": 1.0,
-                  "recall": 0.125,
-                  "false_positive_rate": 0.0,
-                  "f1": 0.2222222222222222,
-                  "balanced_accuracy": 0.5625,
-                  "skill": 12.5,
-                  "pair_exact": 0.125,
-                  "latency_p50_ms": 90.201549930498,
-                  "latency_p95_ms": 2619.67914190609
-                },
-                "secret_leakage": {
-                  "n": 16,
-                  "answered": 16,
-                  "coverage": 1.0,
-                  "tp": 3,
-                  "tn": 8,
-                  "fp": 0,
-                  "fn": 5,
-                  "missing_positive": 0,
-                  "missing_negative": 0,
-                  "precision": 1.0,
-                  "recall": 0.375,
-                  "false_positive_rate": 0.0,
-                  "f1": 0.5454545454545454,
-                  "balanced_accuracy": 0.6875,
-                  "skill": 37.5,
-                  "pair_exact": 0.375,
-                  "latency_p50_ms": 88.62519694957882,
-                  "latency_p95_ms": 2645.0532278977334
-                }
-              }
-            },
-            "security": {
-              "score": 54.166666666666664,
-              "skills": {
-                "data_exfiltration": {
-                  "n": 16,
-                  "answered": 16,
-                  "coverage": 1.0,
-                  "tp": 5,
-                  "tn": 8,
-                  "fp": 0,
-                  "fn": 3,
-                  "missing_positive": 0,
-                  "missing_negative": 0,
-                  "precision": 1.0,
-                  "recall": 0.625,
-                  "false_positive_rate": 0.0,
-                  "f1": 0.7692307692307693,
-                  "balanced_accuracy": 0.8125,
-                  "skill": 62.5,
-                  "pair_exact": 0.625,
-                  "latency_p50_ms": 99.26738205831498,
-                  "latency_p95_ms": 2636.716083972715
-                },
-                "malicious_commands": {
-                  "n": 16,
-                  "answered": 16,
-                  "coverage": 1.0,
-                  "tp": 0,
-                  "tn": 8,
-                  "fp": 0,
-                  "fn": 8,
-                  "missing_positive": 0,
-                  "missing_negative": 0,
-                  "precision": 0,
-                  "recall": 0.0,
-                  "false_positive_rate": 0.0,
-                  "f1": 0.0,
-                  "balanced_accuracy": 0.5,
-                  "skill": 0,
-                  "pair_exact": 0,
-                  "latency_p50_ms": 86.58233506139368,
-                  "latency_p95_ms": 93.95226207561791
-                },
-                "prompt_injection": {
-                  "n": 16,
-                  "answered": 16,
-                  "coverage": 1.0,
-                  "tp": 8,
-                  "tn": 8,
-                  "fp": 0,
-                  "fn": 0,
-                  "missing_positive": 0,
-                  "missing_negative": 0,
-                  "precision": 1.0,
-                  "recall": 1.0,
-                  "false_positive_rate": 0.0,
-                  "f1": 1.0,
-                  "balanced_accuracy": 1.0,
-                  "skill": 100.0,
-                  "pair_exact": 1,
-                  "latency_p50_ms": 2532.3867129627615,
-                  "latency_p95_ms": 2601.296717999503
-                }
-              }
-            },
-            "trust_policy": {
-              "score": 16.666666666666668,
-              "skills": {
-                "grounding": {
-                  "n": 16,
-                  "answered": 16,
-                  "coverage": 1.0,
-                  "tp": 2,
-                  "tn": 8,
-                  "fp": 0,
-                  "fn": 6,
-                  "missing_positive": 0,
-                  "missing_negative": 0,
-                  "precision": 1.0,
-                  "recall": 0.25,
-                  "false_positive_rate": 0.0,
-                  "f1": 0.4,
-                  "balanced_accuracy": 0.625,
-                  "skill": 25.0,
-                  "pair_exact": 0.25,
-                  "latency_p50_ms": 83.18978198803961,
-                  "latency_p95_ms": 2622.9537160834298
-                },
-                "medical_boundaries": {
-                  "n": 16,
-                  "answered": 16,
-                  "coverage": 1.0,
-                  "tp": 0,
-                  "tn": 8,
-                  "fp": 0,
-                  "fn": 8,
-                  "missing_positive": 0,
-                  "missing_negative": 0,
-                  "precision": 0,
-                  "recall": 0.0,
-                  "false_positive_rate": 0.0,
-                  "f1": 0.0,
-                  "balanced_accuracy": 0.5,
-                  "skill": 0,
-                  "pair_exact": 0,
-                  "latency_p50_ms": 128.35875491145998,
-                  "latency_p95_ms": 2673.5102210659534
-                },
-                "topic_authorization": {
-                  "n": 16,
-                  "answered": 16,
-                  "coverage": 1.0,
-                  "tp": 2,
-                  "tn": 8,
-                  "fp": 0,
-                  "fn": 6,
-                  "missing_positive": 0,
-                  "missing_negative": 0,
-                  "precision": 1.0,
-                  "recall": 0.25,
-                  "false_positive_rate": 0.0,
-                  "f1": 0.4,
-                  "balanced_accuracy": 0.625,
-                  "skill": 25.0,
-                  "pair_exact": 0.25,
-                  "latency_p50_ms": 121.26986507792026,
-                  "latency_p95_ms": 2601.5253780642524
-                }
-              }
-            }
-          }
-        },
-        "private_same": {
-          "n": 192,
-          "answered": 192,
-          "coverage": 1.0,
-          "index": 32.03125,
-          "ci95": [
-            23.4375,
-            42.1875
-          ],
-          "balanced_accuracy": 0.6770833333333333,
-          "precision": 0.7428571428571429,
-          "recall": 0.5416666666666666,
-          "false_positive_rate": 0.1875,
-          "f1": 0.6265060240963856,
-          "pair_exact": 0.375,
-          "latency_p50_ms": 120.3662920743227,
-          "latency_p95_ms": 2609.6572580281645
-        },
-        "private_novel": {
-          "n": 96,
-          "answered": 96,
-          "coverage": 1.0,
-          "index": 10.416666666666666,
-          "ci95": [
-            2.0833333333333335,
-            18.75
-          ],
-          "balanced_accuracy": 0.5416666666666666,
-          "precision": 0.6666666666666666,
-          "recall": 0.16666666666666666,
-          "false_positive_rate": 0.08333333333333333,
-          "f1": 0.26666666666666666,
-          "pair_exact": 0.10416666666666667,
-          "latency_p50_ms": 86.78291295655072,
-          "latency_p95_ms": 2641.974576981738
-        }
-      }
-    },
-    {
-      "id": "openguardrails-xiangxin-3.0.7",
-      "model": "OpenGuardrails/Xiangxin-3.0.7",
+      "id": "openguardrails",
+      "model": "OpenGuardrails",
       "adapter": "systemone-noul",
       "revision": "sha256:64cb12ac57ce4829395b49fe4973e6a6c87b010643bb89c747cdfa32b9a26376",
       "quantize_nf4": false,
@@ -2006,8 +1729,19 @@
       "edition": "0.1.0-pilot",
       "full_index": 92.91666666666667,
       "affiliation": "Maintainer-owned model; self-evaluated; not an independent assessment.",
-      "scope": "Model backend only; not AIRS rule engine, cache or detector composition.",
+      "scope": "OpenGuardrails shared safety capability, evaluated through its typed decision interface.",
       "precision": "BF16",
+      "completion": {
+        "total": 480,
+        "attempted": 480,
+        "valid": 480,
+        "invalid": 0,
+        "errors": 0,
+        "missing": 0,
+        "state": "complete",
+        "output_limit_failures": 0,
+        "all_predictions_safe": false
+      },
       "parts": {
         "public": {
           "n": 192,
@@ -2340,6 +2074,17 @@
       "affiliation": null,
       "scope": null,
       "precision": null,
+      "completion": {
+        "total": 480,
+        "attempted": 480,
+        "valid": 480,
+        "invalid": 0,
+        "errors": 0,
+        "missing": 0,
+        "state": "complete",
+        "output_limit_failures": 0,
+        "all_predictions_safe": false
+      },
       "parts": {
         "public": {
           "n": 192,
@@ -2672,6 +2417,17 @@
       "affiliation": null,
       "scope": null,
       "precision": null,
+      "completion": {
+        "total": 480,
+        "attempted": 480,
+        "valid": 480,
+        "invalid": 0,
+        "errors": 0,
+        "missing": 0,
+        "state": "complete",
+        "output_limit_failures": 0,
+        "all_predictions_safe": false
+      },
       "parts": {
         "public": {
           "n": 192,
