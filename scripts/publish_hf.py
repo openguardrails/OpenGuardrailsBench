@@ -16,6 +16,7 @@ def main():
     p.add_argument('--private-dir',default='private')
     p.add_argument('--public-only',action='store_true')
     p.add_argument('--target',choices=['all','data','space'],default='all')
+    p.add_argument('--verify',action='store_true',help='Read-only deployment and visibility checks')
     a=p.parse_args()
     token=os.getenv('HF_TOKEN')
     cache=Path.home()/'.cache/huggingface/token'
@@ -26,6 +27,34 @@ def main():
            data=json.dumps(body).encode() if body is not None else None,
            headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'})
         with urllib.request.urlopen(req,timeout=180) as r:return json.load(r)
+    if a.verify:
+        public=request(f'/api/datasets/{a.org}/{a.name}')
+        private=request(f'/api/datasets/{a.org}/{a.name}-private')
+        space=request(f'/api/spaces/{a.org}/{a.name}')
+        runtime=request(f'/api/spaces/{a.org}/{a.name}/runtime')
+        if public.get('private') or not private.get('private') or space.get('private'):
+            raise RuntimeError('Release visibility check failed')
+        try:
+            urllib.request.urlopen(f'https://huggingface.co/api/datasets/{a.org}/{a.name}-private',timeout=30)
+            raise RuntimeError('Private dataset is visible anonymously')
+        except urllib.error.HTTPError as error:
+            if error.code not in [401,403,404]:raise
+        host=space.get('host')
+        if not host and runtime.get('domains'):
+            host=runtime['domains'][0]['domain']
+        if host and not host.startswith('http'):host='https://'+host
+        receipt={'public_dataset':public['id'],'private_dataset':private['id'],
+                 'private_verified':True,'space_stage':runtime.get('stage'),'host':host}
+        if host:
+            with urllib.request.urlopen(host,timeout=60) as response:
+                html=response.read().decode()
+            if 'OpenGuardrailsBench' not in html:raise RuntimeError('Hosted app content mismatch')
+            with urllib.request.urlopen(host.rstrip('/')+'/leaderboard.json',timeout=60) as response:
+                board=json.load(response)
+            receipt['hosted_models']=len(board['models'])
+            receipt['public_cases']=board['models'][0]['parts']['public']['n'] if board['models'] else 0
+        print(json.dumps(receipt),flush=True)
+        return
     def ensure(kind,name,private=False):
         try:request('/api/repos/create',{'type':kind,'name':name,'organization':a.org,
              'private':private,**({'sdk':'static'} if kind=='space' else {})})
