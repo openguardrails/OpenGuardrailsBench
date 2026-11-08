@@ -64,18 +64,24 @@ def parse(raw, adapter):
 
 
 class HTTPModel:
-    def __init__(self, base_url, model, adapter="json", api_key="", max_tokens=256):
+    def __init__(self, base_url, model, adapter="json", api_key="", max_tokens=256,
+                 model_filter=None):
         self.base_url, self.model, self.adapter = base_url.rstrip("/"), model, adapter
         self.api_key, self.max_tokens = api_key, max_tokens
+        # Second-layer guard: refuse an incompatible model before spending a request.
+        self.model_filter = model_filter
 
     def __call__(self, row):
+        if self.model_filter is not None:
+            self.model_filter(self.model)
         body = {"model": self.model, "messages": messages(row, self.adapter),
                 "temperature": 0, "max_tokens": self.max_tokens,
                 "chat_template_kwargs": {"enable_thinking": False}}
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["Authorization"] = "Bearer " + self.api_key
         req = urllib.request.Request(self.base_url + "/chat/completions",
-                                     data=json.dumps(body).encode(), headers={
-                                         "Content-Type": "application/json",
-                                         "Authorization": "Bearer " + self.api_key})
+                                     data=json.dumps(body).encode(), headers=headers)
         with urllib.request.urlopen(req, timeout=180) as response:
             out = json.load(response)
         raw = out["choices"][0]["message"].get("content") or ""

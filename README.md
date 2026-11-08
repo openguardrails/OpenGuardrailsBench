@@ -44,7 +44,32 @@ python -m ogb run --engine http --adapter json \
   --rows data/public/ogb-0.1.jsonl --out work/my-model-public
 ```
 
-API keys come from `OGB_API_KEY`. Pin the server model revision in your deployment and keep its receipt with the submission. Resume with the identical command: successful rows are retained, errors and invalid outputs are retried. Changing the model, suite, or configuration requires a new output directory.
+API keys come from `OGB_API_KEY`.
+
+### Named providers
+
+Hosted OpenAI-compatible providers can be selected by name instead of a free-form base URL:
+
+```bash
+export ORCAROUTER_API_KEY=...            # create one at https://www.orcarouter.ai/console
+python -m ogb provider list              # named providers, key env names, default model
+python -m ogb provider models --provider orcarouter   # live, capability-filtered catalog
+python -m ogb run --engine http --provider orcarouter --adapter json \
+  --rows data/public/ogb-0.1.jsonl --out work/orcarouter-public
+```
+
+**OrcaRouter Cyber Inference** ([OrcaRouter](https://www.orcarouter.ai), [cyber provider page](https://www.orcarouter.ai/cyber),
+[cyber-tier model catalog](https://www.orcarouter.ai/models?tier=cyber)) is a named provider for security teams running authorized,
+scoped guardrail evaluation: it routes many models behind one OpenAI-compatible endpoint at
+`https://api.orcarouter.ai/v1`. The benchmark measures guardrails, a defensive (blue-team) workload, so the
+provider makes `orcarouter/auto` the default model (works with any key), recommends the dedicated cyber models
+OrcaCyber Ultra (`orcacyber-ultra-1.0`, security code scanning and multi-step reasoning over large codebases)
+and OrcaCyber Zero (`orcacyber-zero-1.5`) for teams cleared through business verification, and falls back to
+`orcarouter/fusion`. The model list is discovered from `GET /v1/models` and filtered to chat-compatible models;
+the verified cold-start seed is used, clearly labelled as degraded, only when discovery fails. Reasoning routes
+often spend the default 256-token completion cap on reasoning, so raise `--max-tokens` for them. The run's
+`config.json` records the provider, resolved base URL and catalog source. `--engine http --base-url`,
+`--engine systemone` and local `--engine transformers` runs are unchanged. Pin the server model revision in your deployment and keep its receipt with the submission. Resume with the identical command: successful rows are retained, errors and invalid outputs are retried. Changing the model, suite, or configuration requires a new output directory.
 
 For a local open-weight model:
 
